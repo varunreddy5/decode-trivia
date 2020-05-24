@@ -1,0 +1,7 @@
+<div class="row">
+  <div class="col-md-8 offset-md-2 text-center">
+    <% flash.each do |message_type, message_tag| %>
+      <div class="mt-4 alert alert-info %>" style="width:100%"> <%= message_tag %></div>
+    <% end %>
+  </div>
+</div>

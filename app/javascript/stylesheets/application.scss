@@ -1,0 +1,55 @@
+@import 'bootstrap';
+@import './variables';
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+/************************** Devise views *************************/
+.devise-form-row {
+  height: 88vh;
+  .devise-form-column {
+    background-color: rgb(255, 255, 255);
+    padding: 40px;
+    border: $border;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+    .form-control {
+      padding: 1.4rem 1.1rem !important;
+    }
+    .form-group {
+      margin-bottom: 1rem !important;
+    }
+    .devise-form-content {
+      .heading {
+        font-size: 1.75rem;
+        font-weight: 100;
+        margin-bottom: 40px !important;
+        color: $primary-color;
+      }
+      .helper-content {
+        margin-top: 0px !important;
+      }
+    }
+    .sign-up-button,
+    .sign-in-button {
+      background-color: #4299e1 !important;
+      border: none;
+      color: white;
+      padding: 0.6rem 0.75rem !important;
+    }
+    .shared-links {
+      .not-registered {
+        color: rgba(34, 41, 47, 0.65);
+      }
+      .account-link {
+        color: rgba(34, 41, 47, 0.8);
+        text-decoration: none;
+        font-weight: 600;
+        &:hover {
+          color: rgba(34, 41, 47, 1);
+        }
+      }
+    }
+  }
+}
+/************************** End of Devise views *************************/
