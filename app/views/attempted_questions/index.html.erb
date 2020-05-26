@@ -1,0 +1,30 @@
+<% @attempted_questions.each do |attempt| %>
+  <div class="row align-items-center justify-content-center" style="height: 35vh;">
+    <div class="col-md-9 question-col">
+      <div class="row">
+        <div class="col-md-12">
+          <p class="question-title"><%= attempt.question.title %></p>
+        </div>
+      </div>
+      <div class="row">
+        <% attempt.question.options.each do |option| %>
+          <div class="col-md-6 options">
+            <div class="option-link">
+              <p class="option-<%= option.id %> <%='correct-answer' if option.correct%> <%='wrong-answer' if attempt.user_answer == option.id && !option.correct%>">
+                <%= option.name %>
+              </p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="row text-left mt-3">
+        <div class="col-md-12">
+          <span class= "mr-5">Categories: </span>
+          <% attempt.question.tags.each do |tag| %>
+            <span class="question-tag mr-2"><%= tag.name %></span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -64,6 +64,7 @@ class QuestionsController < ApplicationController
       user_stat.right_streak += 1
       user_stat.max_right_streak = user_stat.right_streak > user_stat.max_right_streak ? user_stat.right_streak : user_stat.max_right_streak
       user_stat.wrong_streak = 0 if user_stat.wrong_streak > 0
+      
     else
       current_user.score -= 1
       @correct_answer = false
@@ -74,6 +75,21 @@ class QuestionsController < ApplicationController
     current_user.save
     user_stat.save
     current_user.attempted_questions.create(question: @question, user_answer: @submitted_answer_id)
+
+    # category_score
+    @question.tags.each do |tag|
+      if current_user.tag_scores.where(tag: tag).blank?
+        tag_score=current_user.tag_scores.create(tag: tag)
+      else
+        tag_score = current_user.tag_scores.where(tag: tag).first
+      end
+      if @correct_answer
+        tag_score.score += 4
+      else
+        tag_score.score -= 1
+      end
+      tag_score.save
+    end
     respond_to do |format|
       format.js { render layout: false}
     end

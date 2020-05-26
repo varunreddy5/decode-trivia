@@ -1,0 +1,16 @@
+<table class="table table-bordered table-dark" role="datatable">
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tag_scores.each do |tag_score| %>
+      <tr>
+        <td><%= tag_score.tag.name %></td>
+        <td><%= tag_score.score %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

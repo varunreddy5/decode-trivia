@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :attempted_questions, dependent: :destroy
   
   acts_as_voter
+
+  has_many :tag_scores, dependent: :destroy
   def answered(question)
     self.attempted_questions.where(question: question).first
   end

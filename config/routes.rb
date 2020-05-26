@@ -10,8 +10,10 @@ Rails.application.routes.draw do
       put 'downvote' => "questions#downvote"
     end
   end
-  root 'questions#new'
+  root 'tags#index'
   get "/get-questions", to: "questions#get_questions"
   resources :tags, only: [:create, :index]
   resources :user_stats, only: [:index]
+  resources :tag_scores, only: [:index]
+  resources :attempted_questions, only: [:index]
 end

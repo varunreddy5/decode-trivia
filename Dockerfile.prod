@@ -16,6 +16,7 @@ WORKDIR /usr/src/app/
 RUN gem install bundler
 RUN bundle install
 COPY . /usr/src/app/
+RUN yarn install --check-files
 RUN bin/rails assets:precompile
 # ENTRYPOINT ["./docker-entrypoint.sh"]
 CMD ["bin/rails", "s", "-b", "0.0.0.0"]

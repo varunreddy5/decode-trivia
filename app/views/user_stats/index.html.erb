@@ -7,6 +7,7 @@
       <th>Score</th>
       <th>Attempted Questions</th>
       <th>Average Score Per Question</th>
+      <th>Best Category</th>
     </tr>
   </thead>
   <tbody>
@@ -17,7 +18,8 @@
         <td><%= user_stat.max_wrong_streak %></td>
         <td><%= user_stat.user.score %></td>
         <td><%= user_stat.user.attempted_questions.count%></td>
-        <td><%=  !(user_stat.user.score.to_f / user_stat.user.attempted_questions.count.to_f).nan? ?  (user_stat.user.score.to_f / user_stat.user.attempted_questions.count.to_f) : 0 %></td>
+        <td><%=  !(user_stat.user.score.to_f / user_stat.user.attempted_questions.count.to_f).nan? ?  (user_stat.user.score.to_f / user_stat.user.attempted_questions.count.to_f).round(2) : 0 %></td>
+        <td><%= best_category(user_stat.user) %></td>
       </tr>
     <% end %>
   </tbody>

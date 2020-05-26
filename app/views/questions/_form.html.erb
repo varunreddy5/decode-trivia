@@ -4,7 +4,7 @@
     <%= f.text_field :title, class: "form-control", placeholder: "Enter the Question" %>
   </div>
   <div class="form-group">
-    <%= f.label :tag_ids, "Tags" %>
+    <%= f.label :tag_ids, "Categories" %>
     <%= f.select :tag_ids, Tag.all.pluck(:name, :id), {}, { multiple: true, class: "selectize", placeholder: "Select one or more tags" } %>
   </div>
   <%= f.fields_for :options do |option| %>

@@ -2,7 +2,7 @@
   <div class="col-md-4 offset-md-3">
     <h5 class="tags-heading">Choose to start trivia</h5>
     <div class="form-group">
-      <%= select_tag "Tag", options_from_collection_for_select(@tags, :id, :name), {class: "select-input-tags", id: "select-tag", prompt: "Select one tag" } %>
+      <%= select_tag "Tag", options_from_collection_for_select(@tags, :id, :name), {class: "select-input-tags", id: "select-tag", prompt: "Select one category" } %>
     </div>
   </div>
 </div>
@@ -10,7 +10,7 @@
 <div class="row text-center">
   <div class="col-md-4 offset-md-3">
     <input type="checkbox" id='all-tags-check' class='chk-btn' />
-    <label for='all-tags-check'>All Tags</label>
+    <label for='all-tags-check'>Answer all questions</label>
   </div>
   <div class="col-md-4 offset-md-3 mt-5">
     <%= link_to "Start Trivia", questions_path(tag: ""), class: "btn btn-primary", id: "start-trivia-btn"%>
