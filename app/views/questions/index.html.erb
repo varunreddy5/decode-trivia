@@ -1,17 +1,32 @@
-<div class="row">
-  <div class="col-md-9">
-    <p>User Score: <%= current_user.score %></p>
-    <p>Right Streak: <%= current_user.user_stat.right_streak %></p>
-    <p>Max Right Streak: <%= current_user.user_stat.max_right_streak %></p>
-    <p>wrong Streak: <%= current_user.user_stat.wrong_streak %></p>
-    <p>max wrong Streak: <%= current_user.user_stat.max_wrong_streak %></p>
+<div class="row mt-3">
+  <div class="col-md-12">
+    <table class="table table-bordered table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Score</th>
+          <th scope="col">Right Streak</th>
+          <th scope="col">Highest Right Streak</th>
+          <th scope="col">Wrong Streak</th>
+          <th scope="col">Highest Wrong Streak</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td> <%= current_user.score %></td>
+          <td><%= current_user.user_stat.right_streak %></td>
+          <td><%= current_user.user_stat.max_right_streak %></td>
+          <td><%= current_user.user_stat.wrong_streak %></td>
+          <td><%= current_user.user_stat.max_wrong_streak %></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 <% if @question.present? %>
   <% question = @question %>
   <% answered_question = current_user.answered(question)%>
-  <div class="row align-items-center justify-content-center" style="height: 50vh;">
-    <div class="col-md-9 question-col">
+  <div class="row align-items-center">
+    <div class="col-md-9 offset-md-1 question-col">
       <div class="row">
         <div class="col-md-12">
           <p class="question-title" data-answered="<%= !answered_question.nil? %>"><%= question.title %></p>
@@ -43,11 +58,23 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-1 offset-md-2">
+      <div id="upvote-<%=@question.id %>">
+        <%= render 'questions/upvote', question: @question %>
+      </div>
+    </div>
+    <div class="col-md-1 ml-2">
+      <div id="downvote-<%=@question.id %>">
+        <%= render 'questions/downvote', question: @question %>
+      </div>
+    </div>
+  </div>
   <div class="row align-items-center justify-content-center" style="height: 10vh;">
-    <div class="col-md-1 offset-md-8 text-right">
+    <div class="col-md-1 offset-md-7 text-right">
       <%= link_to  "Next", questions_path(tag: params[:tag]), class: "btn btn-primary next-button" %>
     </div>
   </div>
 <% else %>
-  <h5 class="mt-5">You have completed the Trivia! Go to url to see all the questions you have answered.</h5>
+  <h5 class="mt-5 text-center">You have completed the Trivia! </h5>
 <% end %>

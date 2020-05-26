@@ -58,3 +58,7 @@ body {
   }
 }
 /************************** End of Devise views *************************/
+.btn-primary {
+  background-color: $button-color !important;
+  border: none;
+}

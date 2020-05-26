@@ -1,29 +1,35 @@
 @import './variables';
 
-// .tags-index {
-//   padding: 50px 40px 20px 40px;
-//   border: $border;
-//   border-radius: $border-radius;
-//   box-shadow: $box-shadow;
-//   .heading {
-//     margin-bottom: 40px;
-//     font-size: 25px;
-//     color: $primary-color;
-//   }
-//   .tags {
-//     margin-top: 30px;
-//     .tag-link {
-//       text-decoration: none;
-//       color: $primary-color;
-//       // padding: 7px 12px;
-//       // border: $border;
-//       // border-radius: $border-radius;
-//     }
-//   }
-// }
 .tags {
   margin-top: 50px;
+
+  .tags-heading {
+    text-transform: uppercase;
+    font-size: 19px;
+    letter-spacing: 3px;
+    text-align: center;
+    margin-bottom: 60px;
+  }
 }
 #start-trivia-btn {
   display: none;
+}
+input.chk-btn {
+  display: none;
+}
+input.chk-btn + label {
+  border: 1px solid $button-color-indigo;
+  color: $button-color-indigo;
+  background: white;
+  padding: 5px 8px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+input.chk-btn + label:active,
+input.chk-btn:checked + label {
+  background: $button-color-indigo;
+  color: white;
+}
+input[class='chk-btn'][disabled] + label {
+  opacity: 0.4;
 }

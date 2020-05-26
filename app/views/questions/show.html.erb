@@ -1,18 +1,34 @@
-<p id="notice"><%= notice %></p>
-<p>
-  <strong>Title:</strong>
-  <%= @question.title %>
-</p>
-<p>
-  <strong>Tags:</strong>
-  <% @question.tags.each do |tag| %>
-    <p> <%= tag.name %></p>
-  <% end %>
-</p>
-<p>
-  <strong>Options:</strong>
-  <% @question.options.each do |option| %>
-    <p> <%= option.name %> <%= option.correct %></p>
-  <% end %>
-</p>
-<%= link_to  "Edit", edit_question_path(@question), class: "btn btn-primary" %>
+<div class="row align-items-center justify-content-center" style="height: 50vh;">
+  <div class="col-md-9 question-col">
+    <div class="row">
+      <div class="col-md-12">
+        <p class="question-title"><%= @question.title %></p>
+      </div>
+    </div>
+    <div class="row">
+      <% @question.options.each do |option| %>
+        <div class="col-md-6 options">
+          <div class="option-link">
+            <p class="option-<%= option.id %> <%= 'correct-answer' if option.correct %>">
+              <%= option.name %>
+            </p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="row text-left mt-3">
+      <div class="col-md-12">
+        <span class= "mr-5">Tags: </span>
+        <% @question.tags.each do |tag| %>
+          <span class="question-tag mr-2"><%= tag.name %></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row text-center">
+  <div class="col-md-10 offset-md-1">
+    <%= link_to  "Back", new_question_path, class: "btn btn-outline-warning mr-3" %>
+    <%= link_to  "Edit Question", edit_question_path(@question), class: "btn btn-primary ml-3" %>
+  </div>
+</div>

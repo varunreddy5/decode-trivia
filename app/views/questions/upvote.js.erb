@@ -1,0 +1,2 @@
+$("#upvote-<%= @question.id %>").html("<%=j render 'questions/upvote', question: @question %>")
+$("#downvote-<%= @question.id %>").html("<%=j render 'questions/downvote', question: @question %>")

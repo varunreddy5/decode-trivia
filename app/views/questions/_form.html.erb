@@ -1,16 +1,16 @@
 <%= form_for @question do |f| %>
   <div class="form-group">
-    <%= f.label :title %>
-    <%= f.text_field :title, class: "form-control" %>
+    <%= f.label :title, "Question" %>
+    <%= f.text_field :title, class: "form-control", placeholder: "Enter the Question" %>
   </div>
   <div class="form-group">
     <%= f.label :tag_ids, "Tags" %>
-    <%= f.select :tag_ids, Tag.all.pluck(:name, :id), {}, { multiple: true, class: "selectize" } %>
+    <%= f.select :tag_ids, Tag.all.pluck(:name, :id), {}, { multiple: true, class: "selectize", placeholder: "Select one or more tags" } %>
   </div>
   <%= f.fields_for :options do |option| %>
-    <%= option.check_box :correct, class: "form-check-input option-checkbox"%>
-    <%= option.text_field :name, class: "form-control option-input" %>
+    <%= render 'option_form', option: option%>
   <% end %>
+  <div class="question-helper-text">*check one option indicating the answer</div>
   <div class="form-group">
     <%= f.submit class: "btn btn-primary" %>
   </div>

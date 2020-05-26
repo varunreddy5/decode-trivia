@@ -1,4 +1,5 @@
 class TagsController < ApplicationController
+  before_action :authenticate_user!
   def create
     @tag = Tag.new(tag_params)
     if @tag.save

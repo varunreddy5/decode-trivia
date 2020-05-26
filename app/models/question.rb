@@ -5,4 +5,5 @@ class Question < ApplicationRecord
   has_many :options, inverse_of: :question, dependent: :destroy
   accepts_nested_attributes_for :options, reject_if: :all_blank, allow_destroy: true
   has_many :attempted_questions, dependent: :destroy
+  acts_as_votable
 end

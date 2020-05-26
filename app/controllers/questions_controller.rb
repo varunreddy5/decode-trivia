@@ -8,17 +8,15 @@ class QuestionsController < ApplicationController
   end
 
   def index
-    tag = Tag.find(params[:tag])
-    questions = tag.questions
+    if params[:tag] == "all-tags"
+      questions = Question.all
+    else
+      tag = Tag.find(params[:tag])
+      questions = tag.questions
+    end
     attempted_questions = current_user.attempted_questions.map(&:question_id)
     @question = questions.where.not(id: attempted_questions).limit(1).first
-
-    # @pagy, @questions = pagy(Question.where.not(id: attempted_questions), items: 1)
-    # @pagy, @questions = pagy(a, items: 1)
-    # tag = Tag.find(params[:tag])
-    # questions = tag.questions
-    # attempted_questions = current_user.attempted_questions.map(&:question_id)
-    # @questions = questions.where.not(id: attempted_questions).limit(10)
+    # .sort_by{|q|-(q.get_upvotes.size-q.get_downvotes.size)*rand()}
   end
   
   def get_questions
@@ -38,8 +36,9 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    # @question = Question.find(params[:id])
-    # @question.update(question_params)
+    @question = Question.find(params[:id])
+    @question.update_attributes(question_params)
+    redirect_to @question
   end
   def create
     @question = Question.new(question_params)
@@ -47,7 +46,6 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       if @question.save
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
-        
       else
         format.html { render :new }
         format.json { render json: @question.errors, status: :unprocessable_entity }
@@ -60,14 +58,12 @@ class QuestionsController < ApplicationController
     @submitted_answer_id = params[:answer].to_i
     @correct_answer_id = @question.options.where(correct: true).first.id
     user_stat = current_user.user_stat
-    
     if @submitted_answer_id == @correct_answer_id
       current_user.score += 4
       @correct_answer = true
       user_stat.right_streak += 1
       user_stat.max_right_streak = user_stat.right_streak > user_stat.max_right_streak ? user_stat.right_streak : user_stat.max_right_streak
       user_stat.wrong_streak = 0 if user_stat.wrong_streak > 0
-      
     else
       current_user.score -= 1
       @correct_answer = false
@@ -83,6 +79,21 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def upvote
+    @question = Question.find(params[:id])
+    @question.upvote_from current_user
+    respond_to do |format|
+      format.js{ render layout: false}
+    end
+  end
+
+  def downvote
+    @question = Question.find(params[:id])
+    @question.downvote_from current_user
+    respond_to do |format|
+      format.js{ render layout: false}
+    end
+  end
   private
   def question_params
     params.require(:question).permit(:title, tag_ids: [], options_attributes: [:id, :name, :correct, :_destroy])

@@ -10,7 +10,6 @@ require('datatables.net');
 require('datatables.net-bs4');
 require('datatables.net-bs4/css/dataTables.bootstrap4.min.css');
 import '../stylesheets/application.scss';
-var trivia_start = false;
 document.addEventListener('turbolinks:load', () => {
   $('[data-toggle="tooltip"]').tooltip();
   $('[data-toggle="popover"]').popover();
@@ -43,24 +42,41 @@ document.addEventListener('turbolinks:load', () => {
             });
             selectizeCallback = null;
             $('.tag-modal').modal('toggle');
-            // $.rails.enableFormElements($('#new_tag'));
+            // $.rails.enableFormElements($($.rails.formSubmitSelector));
+            $.rails.enableFormElements($('#new_tag'));
           },
         });
       });
     },
   });
 
-  $('input[type=checkbox]').change(function () {
-    // When any radio button on the page is selected,
-    // then deselect all other radio buttons.
-    $('input[type=checkbox]:checked').not(this).prop('checked', false);
+  $('.select-input-tags').selectize({
+    sortField: 'text',
   });
+
+  $("input[type=checkbox][id^='question_option']").change(function () {
+    $("input[type=checkbox][id^='question_option']:checked")
+      .not(this)
+      .prop('checked', false);
+  });
+  var get_url = $('#start-trivia-btn').attr('href');
   $('#select-tag').change(function (e) {
-    console.log($(this).val());
+    $('#all-tags-check').prop('disabled', true);
     var tag_id = $(this).val();
-    var get_url = $('#start-trivia-btn').attr('href');
     $('#start-trivia-btn').attr('href', get_url + tag_id);
     $('#start-trivia-btn').show();
+  });
+
+  $("input[type=checkbox][class='chk-btn']").change(function () {
+    if (this.checked) {
+      $('#select-tag')[0].selectize.disable();
+      $('#start-trivia-btn').attr('href', get_url + 'all-tags');
+      $('#start-trivia-btn').show();
+    } else {
+      $('#start-trivia-btn').attr('href', get_url);
+      $('#select-tag')[0].selectize.enable();
+      $('#start-trivia-btn').hide();
+    }
   });
 
   var questionAnswered = $('.question-title').attr('data-answered');
@@ -71,10 +87,9 @@ document.addEventListener('turbolinks:load', () => {
   }
 
   $("table[role='datatable']").each(function () {
-    $(this).DataTable({
-      // processing: true,
-      // serverSide: true,
-      // ajax: $(this).data('url'),
-    });
+    $(this).DataTable();
   });
+});
+$(window).on('unload', function (e) {
+  $.rails.enableFormElements($($.rails.formSubmitSelector));
 });

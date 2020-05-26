@@ -2,11 +2,11 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Max Right Streak</th>
-      <th>Max Wrong Streak</th>
+      <th>Maximum Right Streak</th>
+      <th>Maximum Wrong Streak</th>
       <th>Score</th>
       <th>Attempted Questions</th>
-      <th>Avgerage Score</th>
+      <th>Average Score Per Question</th>
     </tr>
   </thead>
   <tbody>
@@ -17,7 +17,7 @@
         <td><%= user_stat.max_wrong_streak %></td>
         <td><%= user_stat.user.score %></td>
         <td><%= user_stat.user.attempted_questions.count%></td>
-        <td><%= (user_stat.user.score.to_f / user_stat.user.attempted_questions.count.to_f) %></td>
+        <td><%=  !(user_stat.user.score.to_f / user_stat.user.attempted_questions.count.to_f).nan? ?  (user_stat.user.score.to_f / user_stat.user.attempted_questions.count.to_f) : 0 %></td>
       </tr>
     <% end %>
   </tbody>
