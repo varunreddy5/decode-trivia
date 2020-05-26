@@ -1,0 +1,8 @@
+<div class="row tags">
+  <div class="col-md-4 offset-md-3">
+    <div class="form-group">
+      <%= select_tag "Tag", options_from_collection_for_select(@tags, :id, :name), {:class=>'form-control', id: "select-tag" }%>
+    </div>
+    <%= link_to "Start Trivia", questions_path(tag: ""), class: "btn btn-primary", id: "start-trivia-btn"%>
+  </div>
+</div>

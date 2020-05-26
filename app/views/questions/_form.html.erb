@@ -1,0 +1,44 @@
+<%= form_for @question do |f| %>
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :tag_ids, "Tags" %>
+    <%= f.select :tag_ids, Tag.all.pluck(:name, :id), {}, { multiple: true, class: "selectize" } %>
+  </div>
+  <%= f.fields_for :options do |option| %>
+    <%= option.check_box :correct, class: "form-check-input option-checkbox"%>
+    <%= option.text_field :name, class: "form-control option-input" %>
+  <% end %>
+  <div class="form-group">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>
+<div class="modal fade tag-modal" id="tagModal" tabindex="-1" role="dialog" aria-labelledby="tagModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="tagModalLabel">Add New Tag</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_for Tag.new do |f| %>
+          <div class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :description %>
+            <%= f.text_field :description, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.submit class: "btn btn-primary"%>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

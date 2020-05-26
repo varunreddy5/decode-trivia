@@ -1,0 +1,8 @@
+<% if @correct_answer %>
+  $(".option-<%= @correct_answer_id%>").addClass("correct-answer");
+<% else %>
+  $(".option-<%= @submitted_answer_id %>").addClass("wrong-answer");
+  $(".option-<%= @correct_answer_id%>").addClass("correct-answer");
+<% end %>
+$(".option-link").css("pointer-events", "none");
+$('.next-button').show();

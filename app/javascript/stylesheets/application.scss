@@ -1,7 +1,12 @@
 @import 'bootstrap';
+@import 'selectize/dist/css/selectize';
+@import 'selectize/dist/css/selectize.default';
 @import './variables';
+@import './questions.scss';
+@import './tags.scss';
 body {
   font-family: 'Source Sans Pro', sans-serif;
+  // font-family: 'Open Sans', sans-serif;
 }
 
 /************************** Devise views *************************/

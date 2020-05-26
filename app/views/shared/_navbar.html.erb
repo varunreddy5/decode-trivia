@@ -8,6 +8,15 @@
       <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
+      <li class="nav-item">
+        <%= link_to  "Create Question", new_question_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to  "Take Quiz", tags_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to  "User Scores", user_stats_path, class: "nav-link" %>
+      </li>
     </ul>
     <ul class="navbar-nav ml-auto">
       <% if user_signed_in? %>

@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-md-9">
+    <p>User Score: <%= current_user.score %></p>
+    <p>Right Streak: <%= current_user.user_stat.right_streak %></p>
+    <p>Max Right Streak: <%= current_user.user_stat.max_right_streak %></p>
+    <p>wrong Streak: <%= current_user.user_stat.wrong_streak %></p>
+    <p>max wrong Streak: <%= current_user.user_stat.max_wrong_streak %></p>
+  </div>
+</div>
+<% if @question.present? %>
+  <% question = @question %>
+  <% answered_question = current_user.answered(question)%>
+  <div class="row align-items-center justify-content-center" style="height: 50vh;">
+    <div class="col-md-9 question-col">
+      <div class="row">
+        <div class="col-md-12">
+          <p class="question-title" data-answered="<%= !answered_question.nil? %>"><%= question.title %></p>
+        </div>
+      </div>
+      <div class="row">
+        <% if !answered_question.nil? %>
+          <% question.options.each do |option| %>
+            <div class="col-md-6 options">
+              <div class="option-link">
+                <p class="option-<%= option.id %> <%= 'correct-answer' if option.correct %> <%= 'wrong-answer' if answered_question.user_answer == option.id && !option.correct %>">
+                  <%= option.name %>
+                </p>
+                <%# end %>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <% question.options.each do |option| %>
+            <div class="col-md-6 options">
+              <%= link_to check_answer_question_path(question, answer: option.id), class:"option-link", method: :post, remote: true do %>
+                <p class="option-<%= option.id %>">
+                  <%= option.name %>
+                </p>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row align-items-center justify-content-center" style="height: 10vh;">
+    <div class="col-md-1 offset-md-8 text-right">
+      <%= link_to  "Next", questions_path(tag: params[:tag]), class: "btn btn-primary next-button" %>
+    </div>
+  </div>
+<% else %>
+  <h5 class="mt-5">You have completed the Trivia! Go to url to see all the questions you have answered.</h5>
+<% end %>

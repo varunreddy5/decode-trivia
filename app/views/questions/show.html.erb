@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <strong>Title:</strong>
+  <%= @question.title %>
+</p>
+<p>
+  <strong>Tags:</strong>
+  <% @question.tags.each do |tag| %>
+    <p> <%= tag.name %></p>
+  <% end %>
+</p>
+<p>
+  <strong>Options:</strong>
+  <% @question.options.each do |option| %>
+    <p> <%= option.name %> <%= option.correct %></p>
+  <% end %>
+</p>
+<%= link_to  "Edit", edit_question_path(@question), class: "btn btn-primary" %>

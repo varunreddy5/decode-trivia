@@ -1,0 +1,20 @@
+<div class="row mt-5">
+  <div class="col-md-8 offset-md-2 tags-index">
+    <%# <div class="row">
+      <div class="col-md-12">
+        <p class="heading">Select a tag and click on continue</p>
+      </div>
+    </div> %>
+    <div class="row">
+      <% @tags.each do |tag| %>
+        <div class="col-md-3 tags text-center">
+          <%= link_to tag.name, questions_path(tag_id: tag.id), class: "btn btn-sm btn-outline-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<%= simple_form_for :question, url: questions_path, method: :get do |f| %>
+  <%= f.input :tag, collection: @tags %>
+  <%= f.submit "Start Trivia", class: "btn btn-primary" %>
+<% end %>

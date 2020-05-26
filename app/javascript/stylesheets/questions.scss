@@ -1,0 +1,44 @@
+@import './variables';
+.new-question-form {
+  .question-heading {
+    margin: 30px 0px;
+  }
+}
+.option-checkbox {
+  margin-top: 0.8rem;
+}
+.question-col {
+  padding: 50px 40px;
+  // border: $border;
+  // border-radius: $border-radius;
+  // box-shadow: $box-shadow;
+  .question-title {
+    font-size: 25px;
+    margin-bottom: 27px;
+  }
+  .option-link {
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    color: $primary-color;
+    p[class^='option'] {
+      border: $border;
+      padding: 10px;
+      border-radius: $border-radius;
+    }
+    .correct-answer {
+      background-color: #c6f6d5;
+      border: #c6f6d5;
+    }
+    .wrong-answer {
+      background-color: #fed7d7;
+      border: #fed7d7;
+    }
+  }
+}
+.next-button {
+  display: none;
+}
+.option-input {
+  margin: 20px 0px;
+}

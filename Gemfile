@@ -53,3 +53,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 gem 'simple_form'
+gem 'selectize-rails'
+gem 'pagy'

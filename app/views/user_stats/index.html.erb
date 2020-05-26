@@ -1,0 +1,24 @@
+<table class="table table-bordered table-dark" role="datatable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Max Right Streak</th>
+      <th>Max Wrong Streak</th>
+      <th>Score</th>
+      <th>Attempted Questions</th>
+      <th>Avgerage Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user_stats.each do |user_stat| %>
+      <tr>
+        <td><%= user_stat.user.name %></td>
+        <td><%= user_stat.max_right_streak %></td>
+        <td><%= user_stat.max_wrong_streak %></td>
+        <td><%= user_stat.user.score %></td>
+        <td><%= user_stat.user.attempted_questions.count%></td>
+        <td><%= (user_stat.user.score.to_f / user_stat.user.attempted_questions.count.to_f) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

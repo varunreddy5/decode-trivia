@@ -1,0 +1,29 @@
+@import './variables';
+
+// .tags-index {
+//   padding: 50px 40px 20px 40px;
+//   border: $border;
+//   border-radius: $border-radius;
+//   box-shadow: $box-shadow;
+//   .heading {
+//     margin-bottom: 40px;
+//     font-size: 25px;
+//     color: $primary-color;
+//   }
+//   .tags {
+//     margin-top: 30px;
+//     .tag-link {
+//       text-decoration: none;
+//       color: $primary-color;
+//       // padding: 7px 12px;
+//       // border: $border;
+//       // border-radius: $border-radius;
+//     }
+//   }
+// }
+.tags {
+  margin-top: 50px;
+}
+#start-trivia-btn {
+  display: none;
+}
