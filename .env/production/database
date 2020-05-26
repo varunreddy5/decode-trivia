@@ -1,0 +1,3 @@
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=varun2@7
+POSTGRES_DB=decode_trivia_production
